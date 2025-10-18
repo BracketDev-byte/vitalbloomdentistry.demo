@@ -1,0 +1,146 @@
+1) Pages & Content (visible to visitors)
+
+ Home — hero, short services preview, CTA (Book / Contact)
+
+ About — clinic/philosophy + short doctor bio (photo & creds)
+
+ Services — list of treatments (3–6) with short descriptions
+
+ Blog index — list view (cards) showing thumbnail, title, excerpt, date, tags
+
+ Blog detail — full post rendering (title, content, images, tags, publish date)
+
+ Contact — form (name, email, message), clinic address, phone, map embed
+
+ Legal pages — Privacy Policy and Terms (simple placeholders acceptable)
+
+2) CMS (Strapi) — content authoring & client access
+
+ Collections created: Blog, and FAQ, starter has limited CMS.
+
+ Fields present for each collection (title, slug, content, thumbnail, SEO fields)
+
+ Relations working (tags, categories, components) — tested and rendering ✅
+
+ Media uploads (images) working + URL mapping handled in frontend ✅
+
+ Strapi role/permissions: Public role allowed find/findOne for blog/services only
+
+ Strapi admin: create one client editor account (or provide instructions to create)
+
+ Short CMS onboarding doc (1–2 pages) or a 10–20 min recorded walkthrough
+
+3) Functionality & Integrations
+
+ Contact form → sends email via Resend (confirmation to user + notification to clinic)
+
+ Newsletter signup → collects email (stored in DB or forwarded to Resend/SaaS)
+
+ Google Maps or embedded map on Contact page works
+
+ Google Reviews widget present on homepage testimonial area (static embed), starter has no customized goog review.
+
+ Blog images and media served correctly (CORS / absolute URLs handled)
+
+4) SEO & Performance (baseline)
+
+ Meta title & description editable for Home & Blog posts via Strapi
+
+ Open Graph (OG) tags set for pages & posts (image + title + description)
+
+ Basic structured data (schema.org for LocalBusiness / Dentist) on relevant pages
+
+ Sitemap.xml generated & robots.txt present (or placeholder)
+
+ Images optimized (use Next.js <Image/> or optimized export)
+
+ Page responsiveness (mobile / tablet / desktop checked)
+
+5) Security & Hosting
+
+ Frontend deployment plan: Vercel or IONOS VPS (frontend deployed and reachable)
+
+ Strapi deployment: hosted on chosen server with separate strapi_db Postgres
+
+ Strapi admin protected via HTTPS and strong admin password (admin subdomain or path)
+
+ Environment variables set (Strapi app keys, DB URL, Resend API key) and not committed to repo
+
+ Backup plan for Strapi DB (Render/Railway automated DB backups or manual snapshot steps)
+
+ Basic admin protection options considered: Cloudflare Access / HTTP basic auth for /admin (optional but recommended)
+
+6) Analytics & Monitoring
+
+ Analytics installed (Plausible or Google Analytics) and tested (pageview event works)
+
+ Contact form submission events tracked (so clients can see conversions)
+
+ Error / uptime monitoring plan (Sentry, UptimeRobot or manual checks)
+
+7) Accessibility & QA
+
+ Images have alt text (content editors can edit alt via Strapi media fields)
+
+ Forms have labels and error handling UX (required fields, success message)
+
+ Semantic headings and tab order checked quickly with keyboard nav
+
+ Basic Lighthouse smoke test (aim for high accessibility & performance scores where reasonable)
+
+8) Deployment & DNS
+
+ Domain purchased and DNS prepared (client domain or demo subdomain)
+
+ SSL/TLS valid for frontend and Strapi admin (HTTPS)
+
+ DNS records set to point domain to Vercel / IONOS (and subdomain for /admin if used)
+
+ CNAME / A record confirmed and site reachable on client domain
+
+9) Handover & Documentation
+
+ Client onboarding doc: how to add a blog post, how to update service text, where to log into CMS
+
+ Credentials document (how to log in to Strapi admin, analytics, domain) — share securely
+
+ 30 days post-launch support included (confirm scope: minor fixes only)
+
+ Client sign-off checklist prepared (site pages, contact form, content editable, basic SEO)
+
+10) Optional (but recommended) polishing
+
+ Newsletter welcome email template ready (Resend)
+
+ Testimonial entry example in Strapi (so client sees how to add)
+
+ Small UX touches: sticky CTA button, back-to-top, microcopy for trust (e.g., clinic hours)
+
+ Demo content replaced by real client content or clear placeholders for handover
+
+Final Acceptance Criteria (client signs off when all apply)
+
+All Starter pages render correctly on desktop & mobile.
+
+Contact form sends email to the clinic and stores a lead (if implemented).
+
+Client can create and publish a blog post in Strapi (they test during handover).
+
+Meta/SEO fields editable for at least Home & Blog posts.
+
+Site is live on the client domain with valid HTTPS.
+
+
+SUMMARY:
+
+Package:
+starter
+
+cost:
+£3k
+
+features:
+Home, About, Services, Contact, Blog (CMS-driven via Strapi), Contact form (Resend), Basic SEO (meta, schema), default google review widgets, Newsletters
+
+Appropriateness/suitablity(Should be according to industry standards):
+Ideal for solo dentists: affordable, SEO-ready, blog for client control. £1k above WordPress templates justifies custom design, performance, security.
