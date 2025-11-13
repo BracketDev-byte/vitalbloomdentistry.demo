@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { trapFocus } from '@/lib/accessibility';
-import { ImageWithFallback } from '@/components/common/ImageWithFallback';
+import Image from 'next/image';
 
 // Skip links for keyboard navigation
 export function SkipLinks() {
@@ -191,7 +191,8 @@ export function AccessibleImage({
   };
 
   return (
-    <ImageWithFallback
+    <Image
+      fill
       src={imageSrc}
       alt={alt}
       loading={loading}
