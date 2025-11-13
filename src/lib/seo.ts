@@ -2,13 +2,17 @@
 
 import { Metadata } from 'next';
 import { BlogPosts } from '@/utils/types';
-import { pageMetadata, serviceMetadata, defaultOGImages } from '@/config/metadata';
+import {
+  pageMetadata,
+  serviceMetadata,
+  defaultOGImages,
+} from '@/config/metadata';
 import { CONFIG } from '@/config/constants';
 
 // Get the base URL dynamically based on environment
 const getBaseUrl = () => {
-  return CONFIG.isProduction 
-    ? 'https://vitalbloomdentistry.com' 
+  return CONFIG.isProduction
+    ? 'https://vitalbloomdentistry.com'
     : CONFIG.FRONTEND_BASE_URL;
 };
 
@@ -18,7 +22,8 @@ export const baseSEO = {
     template: '%s | Vital Bloom Biological Dentistry', // %s is the placeholder for the child page title
     default: 'Vital Bloom Biological Dentistry', // Fallback title for pages without a specific title
   },
-  description: 'Experience comprehensive biological dental care that prioritizes your overall health. Mercury-free, biocompatible treatments for your smile and well-being.',
+  description:
+    'Experience comprehensive biological dental care that prioritizes your overall health. Mercury-free, biocompatible treatments for your smile and well-being.',
   keywords: [
     'holistic dentist',
     'biological dentistry',
@@ -29,7 +34,7 @@ export const baseSEO = {
     'mercury-free dentist',
     'biological dental implants',
     'ozone therapy dentistry',
-    'nutritional counseling dental'
+    'nutritional counseling dental',
   ],
   openGraph: {
     type: 'website',
@@ -88,7 +93,7 @@ export function generatePageMetadata({
   const fullTitle = title;
   const baseUrl = getBaseUrl();
   const canonicalUrl = url ? `${baseUrl}${url}` : baseUrl;
-  
+
   return {
     title: fullTitle,
     description,
@@ -102,20 +107,24 @@ export function generatePageMetadata({
       title: fullTitle,
       description,
       url: canonicalUrl,
-      images: image ? [
-        {
-          url: image.startsWith('http') ? image : `${baseUrl}${image}`,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ] : baseSEO.openGraph.images,
+      images: image
+        ? [
+            {
+              url: image.startsWith('http') ? image : `${baseUrl}${image}`,
+              width: 1200,
+              height: 630,
+              alt: title,
+            },
+          ]
+        : baseSEO.openGraph.images,
     },
     twitter: {
       ...baseSEO.twitter,
       title: fullTitle,
       description,
-      images: image ? [image.startsWith('http') ? image : `${baseUrl}${image}`] : baseSEO.openGraph.images,
+      images: image
+        ? [image.startsWith('http') ? image : `${baseUrl}${image}`]
+        : baseSEO.openGraph.images,
     },
     robots: baseSEO.robots,
     verification: baseSEO.verification,
@@ -229,7 +238,7 @@ export function generateServiceMetadata(slug: string): Metadata {
   if (!service) {
     return generateServicesMetadata(); // Fallback to services page
   }
-  
+
   return generatePageMetadata({
     title: service.title,
     description: service.description,
@@ -241,19 +250,20 @@ export function generateServiceMetadata(slug: string): Metadata {
 
 // Generate blog post metadata
 export function generateBlogPostMetadata(post: BlogPosts): Metadata {
-  const title = `${post.title} | Vital Bloom Biological Dentistry`;
-  const description = post.excerpt || `Read about ${post.title} and learn more about holistic dental care at Vital Bloom Biological Dentistry.`;
+  const description =
+    post.excerpt ||
+    `Read about ${post.title} and learn more about holistic dental care at Vital Bloom Biological Dentistry.`;
   const keywords = [
     ...baseSEO.keywords,
     post.category.title.toLowerCase(),
-    ...post.tags.map(tag => tag.title.toLowerCase()),
+    ...post.tags.map((tag) => tag.title.toLowerCase()),
     'dental health',
     'oral wellness',
     'holistic health',
   ];
 
   // Use featured image as OG image, or generate dynamic OG image with alt text overlay
-  const ogImage = post.featuredImage?.url 
+  const ogImage = post.featuredImage?.url
     ? `/api/og?title=${encodeURIComponent(post.featuredImage.alternativeText || post.title)}&image=${encodeURIComponent(post.featuredImage.url)}`
     : `/api/og?title=${encodeURIComponent(post.featuredImage?.alternativeText || post.title)}`;
 
@@ -270,12 +280,13 @@ export function generateBlogPostMetadata(post: BlogPosts): Metadata {
 // Generate structured data for organization
 export function generateOrganizationSchema() {
   const baseUrl = getBaseUrl();
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'DentalClinic',
     name: 'Vital Bloom Biological Dentistry',
-    description: 'Holistic dental care focusing on biocompatible treatments and mercury-free dentistry',
+    description:
+      'Holistic dental care focusing on biocompatible treatments and mercury-free dentistry',
     url: baseUrl,
     telephone: process.env.PHONE_NUMBER || '+1-555-123-4567',
     email: process.env.CONTACT_EMAIL || 'info@vitalbloomdentistry.com',
@@ -289,13 +300,14 @@ export function generateOrganizationSchema() {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: process.env.LATITUDE ? parseFloat(process.env.LATITUDE) : 40.7128,
-      longitude: process.env.LONGITUDE ? parseFloat(process.env.LONGITUDE) : -74.0060,
+      latitude: process.env.LATITUDE
+        ? parseFloat(process.env.LATITUDE)
+        : 40.7128,
+      longitude: process.env.LONGITUDE
+        ? parseFloat(process.env.LONGITUDE)
+        : -74.006,
     },
-    openingHours: [
-      'Mo-Fr 09:00-17:00',
-      'Sa 09:00-15:00',
-    ],
+    openingHours: ['Mo-Fr 09:00-17:00', 'Sa 09:00-15:00'],
     priceRange: '$$',
     paymentAccepted: ['Cash', 'Credit Card', 'Insurance'],
     currenciesAccepted: 'USD',
@@ -333,7 +345,8 @@ export function generateOrganizationSchema() {
           itemOffered: {
             '@type': 'MedicalProcedure',
             name: 'Ceramic Dental Implants',
-            description: 'Metal-free zirconia implants for biocompatible restoration',
+            description:
+              'Metal-free zirconia implants for biocompatible restoration',
           },
         },
         {
@@ -341,7 +354,8 @@ export function generateOrganizationSchema() {
           itemOffered: {
             '@type': 'MedicalProcedure',
             name: 'Nutritional Counseling',
-            description: 'Personalized nutrition guidance for optimal oral health',
+            description:
+              'Personalized nutrition guidance for optimal oral health',
           },
         },
         {
@@ -355,9 +369,12 @@ export function generateOrganizationSchema() {
       ],
     },
     sameAs: [
-      process.env.FACEBOOK_URL || 'https://www.facebook.com/vitalbloomdentistry',
-      process.env.INSTAGRAM_URL || 'https://www.instagram.com/vitalbloomdentistry',
-      process.env.LINKEDIN_URL || 'https://www.linkedin.com/company/vitalbloomdentistry',
+      process.env.FACEBOOK_URL ||
+        'https://www.facebook.com/vitalbloomdentistry',
+      process.env.INSTAGRAM_URL ||
+        'https://www.instagram.com/vitalbloomdentistry',
+      process.env.LINKEDIN_URL ||
+        'https://www.linkedin.com/company/vitalbloomdentistry',
     ],
   };
 }
@@ -365,13 +382,15 @@ export function generateOrganizationSchema() {
 // Generate structured data for blog post
 export function generateBlogPostSchema(post: BlogPosts) {
   const baseUrl = getBaseUrl();
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    image: post.featuredImage?.url ? CONFIG.getImageUrl(post.featuredImage.url) : undefined,
+    image: post.featuredImage?.url
+      ? CONFIG.getImageUrl(post.featuredImage.url)
+      : undefined,
     author: {
       '@type': 'Person',
       name: post.authorInfo.name,
@@ -392,19 +411,19 @@ export function generateBlogPostSchema(post: BlogPosts) {
       '@id': `${baseUrl}/blogs/${post.slug}`,
     },
     articleSection: post.category.title,
-    keywords: post.tags.map(tag => tag.title).join(', '),
+    keywords: post.tags.map((tag) => tag.title).join(', '),
     wordCount: post.content.split(' ').length,
     timeRequired: `PT${post.readTime}M`,
   };
 }
 
 // Generate structured data for service pages
-export function generateServiceSchema(slug: string, serviceData?: any) {
+export function generateServiceSchema(slug: string) {
   const baseUrl = getBaseUrl();
   const service = serviceMetadata[slug as keyof typeof serviceMetadata];
-  
+
   if (!service) return null;
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'MedicalProcedure',
@@ -425,9 +444,11 @@ export function generateServiceSchema(slug: string, serviceData?: any) {
 }
 
 // Generate breadcrumb structured data
-export function generateBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
+export function generateBreadcrumbSchema(
+  items: Array<{ name: string; url: string }>
+) {
   const baseUrl = getBaseUrl();
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -441,11 +462,13 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
 }
 
 // Generate FAQ structured data
-export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>) {
+export function generateFAQSchema(
+  faqs: Array<{ question: string; answer: string }>
+) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
+    mainEntity: faqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
@@ -459,12 +482,13 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
 // Generate local business schema for contact page
 export function generateLocalBusinessSchema() {
   const baseUrl = getBaseUrl();
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'DentalClinic',
     name: 'Vital Bloom Biological Dentistry',
-    description: 'Holistic dental care focusing on biocompatible treatments and mercury-free dentistry',
+    description:
+      'Holistic dental care focusing on biocompatible treatments and mercury-free dentistry',
     url: baseUrl,
     telephone: process.env.PHONE_NUMBER || '+1-555-123-4567',
     email: process.env.CONTACT_EMAIL || 'info@vitalbloomdentistry.com',
@@ -478,13 +502,14 @@ export function generateLocalBusinessSchema() {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: process.env.LATITUDE ? parseFloat(process.env.LATITUDE) : 40.7128,
-      longitude: process.env.LONGITUDE ? parseFloat(process.env.LONGITUDE) : -74.0060,
+      latitude: process.env.LATITUDE
+        ? parseFloat(process.env.LATITUDE)
+        : 40.7128,
+      longitude: process.env.LONGITUDE
+        ? parseFloat(process.env.LONGITUDE)
+        : -74.006,
     },
-    openingHours: [
-      'Mo-Fr 09:00-17:00',
-      'Sa 09:00-15:00',
-    ],
+    openingHours: ['Mo-Fr 09:00-17:00', 'Sa 09:00-15:00'],
     priceRange: '$$',
     paymentAccepted: ['Cash', 'Credit Card', 'Insurance'],
     currenciesAccepted: 'USD',
@@ -496,8 +521,12 @@ export function generateLocalBusinessSchema() {
       '@type': 'GeoCircle',
       geoMidpoint: {
         '@type': 'GeoCoordinates',
-        latitude: process.env.LATITUDE ? parseFloat(process.env.LATITUDE) : 40.7128,
-        longitude: process.env.LONGITUDE ? parseFloat(process.env.LONGITUDE) : -74.0060,
+        latitude: process.env.LATITUDE
+          ? parseFloat(process.env.LATITUDE)
+          : 40.7128,
+        longitude: process.env.LONGITUDE
+          ? parseFloat(process.env.LONGITUDE)
+          : -74.006,
       },
       geoRadius: '50000', // 50km radius
     },

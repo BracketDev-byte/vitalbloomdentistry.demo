@@ -6,7 +6,8 @@ export const runtime = 'edge';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const title = searchParams.get('title') || 'Vital Bloom Biological Dentistry';
+    const title =
+      searchParams.get('title') || 'Vital Bloom Biological Dentistry';
     const image = searchParams.get('image');
 
     return new ImageResponse(
@@ -20,7 +21,9 @@ export async function GET(request: NextRequest) {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#f0fdfa',
-            backgroundImage: image ? `url(${image})` : 'linear-gradient(135deg, #0d9488 0%, #14b8a6 100%)',
+            backgroundImage: image
+              ? `url(${image})`
+              : 'linear-gradient(135deg, #0d9488 0%, #14b8a6 100%)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             position: 'relative',
@@ -37,7 +40,7 @@ export async function GET(request: NextRequest) {
               backgroundColor: 'rgba(0, 0, 0, 0.4)',
             }}
           />
-          
+
           {/* Content */}
           <div
             style={{
@@ -63,7 +66,7 @@ export async function GET(request: NextRequest) {
             >
               Vital Bloom Biological Dentistry
             </div>
-            
+
             {/* Title */}
             <div
               style={{
@@ -79,7 +82,7 @@ export async function GET(request: NextRequest) {
             >
               {title}
             </div>
-            
+
             {/* Subtitle */}
             <div
               style={{
@@ -99,7 +102,7 @@ export async function GET(request: NextRequest) {
         height: 630,
       }
     );
-  } catch (e: any) {
+  } catch (e: Error | unknown) {
     console.log(`${e.message}`);
     return new Response(`Failed to generate the image`, {
       status: 500,

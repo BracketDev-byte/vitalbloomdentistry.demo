@@ -10,11 +10,11 @@ import { BlogPosts, BlogResponse } from '@/utils/types';
 import { getImageUrl } from '@/config/constants';
 import { formatBlogDate } from '@/utils/dateFormatter';
 import { Pagination, CompactPagination } from '@/components/ui/Pagination';
-import {Button} from '../ui/button';
+import { Button } from '../ui/button';
 
 interface BlogListProps {
   initialBlogs: BlogPosts[];
-  initialMeta: any;
+  initialMeta: string;
   selectedCategory?: string | null;
   onCategoryChange?: (categorySlug: string | null) => void;
   className?: string;
@@ -22,12 +22,12 @@ interface BlogListProps {
 
 const POSTS_PER_PAGE = 6;
 
-export function BlogList({ 
-  initialBlogs, 
-  initialMeta, 
+export function BlogList({
+  initialBlogs,
+  initialMeta,
   selectedCategory = null,
   onCategoryChange,
-  className = '' 
+  className = '',
 }: BlogListProps) {
   const [blogs, setBlogs] = useState<BlogPosts[]>(initialBlogs);
   const [meta, setMeta] = useState(initialMeta);
@@ -36,8 +36,8 @@ export function BlogList({
   const [error, setError] = useState<string | null>(null);
 
   // Filter blogs based on selected category
-  const filteredBlogs = selectedCategory 
-    ? blogs.filter(blog => blog.category.slug === selectedCategory)
+  const filteredBlogs = selectedCategory
+    ? blogs.filter((blog) => blog.category.slug === selectedCategory)
     : blogs;
 
   const totalPages = Math.ceil(filteredBlogs.length / POSTS_PER_PAGE);
@@ -60,7 +60,7 @@ export function BlogList({
     return (
       <div className="text-center py-12">
         <p className="text-red-600 mb-4">{error}</p>
-        <button 
+        <button
           onClick={() => {
             setError(null);
             setCurrentPage(1);
@@ -119,9 +119,7 @@ export function BlogList({
                 {post.title}
               </h3>
 
-              <p className="text-gray-600 mb-4 line-clamp-3">
-                {post.excerpt}
-              </p>
+              <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
 
               <div className="flex flex-wrap gap-2 mb-4">
                 {post.tags.slice(0, 2).map((t) => (

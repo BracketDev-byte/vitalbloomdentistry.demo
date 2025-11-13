@@ -55,7 +55,10 @@ export interface StrapiRelationMulti<T> {
 // Typed fetch wrapper for Strapi
 type QueryParams = Record<string, string | number | boolean | undefined | null>;
 
-export async function strapiFetch<T>(path: string, opts?: { params?: QueryParams; init?: RequestInit }): Promise<T> {
+export async function strapiFetch<T>(
+  path: string,
+  opts?: { params?: QueryParams; init?: RequestInit }
+): Promise<T> {
   const baseURL = process.env.BACKEND_PUBLIC_BASE_URL;
   if (!baseURL) throw new Error('Missing BACKEND_PUBLIC_BASE_URL env var');
 
@@ -89,7 +92,7 @@ export async function strapiFetch<T>(path: string, opts?: { params?: QueryParams
     } catch {
       body = await res.text().catch(() => null);
     }
-    // eslint-disable-next-line no-console
+
     console.error('Strapi fetch error', res.status, body);
     throw new Error(`Strapi error ${res.status}`);
   }
@@ -98,7 +101,9 @@ export async function strapiFetch<T>(path: string, opts?: { params?: QueryParams
 }
 
 // Helper to safely extract an absolute URL for images (works for absolute or relative Strapi URLs)
-export function getStrapiMediaUrl(upload: StrapiUploadFile | null | undefined): string | null {
+export function getStrapiMediaUrl(
+  upload: StrapiUploadFile | null | undefined
+): string | null {
   if (!upload || !upload.attributes) return null;
   const url = upload.attributes.url;
   if (!url) return null;
@@ -106,5 +111,3 @@ export function getStrapiMediaUrl(upload: StrapiUploadFile | null | undefined): 
   const baseURL = process.env.BACKEND_PUBLIC_BASE_URL ?? '';
   return `${baseURL}${url}`;
 }
-
-
