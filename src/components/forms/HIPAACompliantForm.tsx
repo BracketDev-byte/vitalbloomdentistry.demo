@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { AlertCircle, Shield, Lock, Eye, EyeOff } from 'lucide-react';
+import { AlertCircle, Shield, Lock } from 'lucide-react';
 import {
   HIPAAFormSchema,
   sanitizePatientData,

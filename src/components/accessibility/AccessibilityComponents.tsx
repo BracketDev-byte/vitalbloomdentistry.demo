@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { trapFocus } from '@/lib/accessibility';
+import { ImageWithFallback } from '@/components/common/ImageWithFallback';
 
 // Skip links for keyboard navigation
 export function SkipLinks() {
@@ -29,7 +30,8 @@ export function ScreenReaderOnly({ children }: { children: React.ReactNode }) {
 }
 
 // Accessible button component
-interface AccessibleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface AccessibleButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
@@ -45,12 +47,15 @@ export function AccessibleButton({
   disabled,
   ...props
 }: AccessibleButtonProps) {
-  const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
-  
+  const baseClasses =
+    'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
+
   const variantClasses = {
     primary: 'bg-primary text-white hover:bg-primary/90 focus:ring-primary',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80 focus:ring-secondary',
-    outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground focus:ring-primary',
+    secondary:
+      'bg-secondary text-secondary-foreground hover:bg-secondary/80 focus:ring-secondary',
+    outline:
+      'border border-input bg-background hover:bg-accent hover:text-accent-foreground focus:ring-primary',
     ghost: 'hover:bg-accent hover:text-accent-foreground focus:ring-primary',
   };
 
@@ -122,10 +127,7 @@ export function AccessibleFormField({
 
   return (
     <div className="space-y-2">
-      <label
-        htmlFor={id}
-        className="block text-sm font-medium text-gray-900"
-      >
+      <label htmlFor={id} className="block text-sm font-medium text-gray-900">
         {label}
         {required && (
           <span className="text-red-500 ml-1" aria-label="required">
@@ -133,20 +135,20 @@ export function AccessibleFormField({
           </span>
         )}
       </label>
-      
+
       {description && (
         <p id={descriptionId} className="text-sm text-gray-600">
           {description}
         </p>
       )}
-      
+
       {React.cloneElement(children as React.ReactElement, {
         id,
         'aria-describedby': describedBy || undefined,
         'aria-invalid': error ? 'true' : undefined,
         'aria-required': required,
       })}
-      
+
       {error && (
         <p
           id={errorId}
@@ -162,7 +164,8 @@ export function AccessibleFormField({
 }
 
 // Accessible image component
-interface AccessibleImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface AccessibleImageProps
+  extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
   fallbackSrc?: string;
@@ -188,7 +191,7 @@ export function AccessibleImage({
   };
 
   return (
-    <img
+    <ImageWithFallback
       src={imageSrc}
       alt={alt}
       loading={loading}
@@ -257,7 +260,7 @@ export function AccessibleModal({
         onClick={onClose}
         aria-hidden="true"
       />
-      
+
       {/* Modal */}
       <div
         ref={modalRef}

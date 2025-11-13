@@ -6,7 +6,7 @@ import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { fetchBlogs } from '@/actions/query-actions';
-import { BlogPosts, BlogResponse } from '@/utils/types';
+import { BlogPosts } from '@/utils/types';
 import { getImageUrl } from '@/config/constants';
 import { formatBlogDate } from '@/utils/dateFormatter';
 import { Pagination, CompactPagination } from '@/components/ui/Pagination';

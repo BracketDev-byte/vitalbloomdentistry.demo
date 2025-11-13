@@ -27,7 +27,10 @@ interface BlogDetailContentProps {
   relatedBlogs: BlogPosts[];
 }
 
-export function BlogDetailContent({ blog, relatedBlogs }: BlogDetailContentProps) {
+export function BlogDetailContent({
+  blog,
+  relatedBlogs,
+}: BlogDetailContentProps) {
   const [readingProgress, setReadingProgress] = useState(0);
 
   useEffect(() => {
@@ -39,14 +42,17 @@ export function BlogDetailContent({ blog, relatedBlogs }: BlogDetailContentProps
       const articleTop = articleRect.top;
       const articleHeight = articleRect.height;
       const windowHeight = window.innerHeight;
-      
+
       // Calculate how much of the article is visible
-      const visibleHeight = Math.min(articleHeight, windowHeight - Math.max(0, articleTop));
+
       const scrolledHeight = Math.max(0, -articleTop);
-      
+
       // Calculate progress based on how much has been scrolled through the article
-      const progress = Math.min(100, Math.max(0, (scrolledHeight / articleHeight) * 100));
-      
+      const progress = Math.min(
+        100,
+        Math.max(0, (scrolledHeight / articleHeight) * 100)
+      );
+
       setReadingProgress(Math.round(progress));
     };
 
@@ -91,7 +97,7 @@ export function BlogDetailContent({ blog, relatedBlogs }: BlogDetailContentProps
   return (
     <>
       <StructuredData type="blog-post" data={blog} />
-      
+
       <div className="min-h-screen bg-white">
         {/* Navigation */}
         <nav className="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
@@ -194,7 +200,9 @@ export function BlogDetailContent({ blog, relatedBlogs }: BlogDetailContentProps
                   <p className="font-medium text-gray-900">
                     {blog.authorInfo.name}
                   </p>
-                  <p className="text-sm text-gray-500">{blog.authorInfo.roles}</p>
+                  <p className="text-sm text-gray-500">
+                    {blog.authorInfo.roles}
+                  </p>
                 </div>
               </div>
 
@@ -346,7 +354,10 @@ export function BlogDetailContent({ blog, relatedBlogs }: BlogDetailContentProps
 
               <div className="grid md:grid-cols-2 gap-8">
                 {relatedBlogs.map((relatedBlog) => (
-                  <Link key={relatedBlog.id} href={`/blogs/${relatedBlog.slug}`}>
+                  <Link
+                    key={relatedBlog.id}
+                    href={`/blogs/${relatedBlog.slug}`}
+                  >
                     <article className="group cursor-pointer">
                       <div className="relative overflow-hidden rounded-lg mb-4">
                         <ImageWithFallback

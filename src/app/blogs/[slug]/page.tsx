@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { fetchBlogs } from '@/actions/query-actions';
-import { BlogResponse, BlogPosts } from '@/utils/types';
+import { BlogResponse } from '@/utils/types';
 import { generateBlogPostMetadata } from '@/lib/seo';
 import { BlogDetailContent } from '@/components/sections/BlogDetailContent';
 import { StructuredData } from '@/components/seo/StructuredData';
@@ -10,7 +10,9 @@ interface BlogDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   const blogs: BlogResponse = await fetchBlogs();
   const blog = blogs.data.find((b) => b.slug === slug);

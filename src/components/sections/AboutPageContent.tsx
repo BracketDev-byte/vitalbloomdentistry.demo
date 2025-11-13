@@ -10,7 +10,6 @@ import {
   Zap,
   MapPin,
   Calendar,
-  Shield,
 } from 'lucide-react';
 import Link from 'next/link';
 
